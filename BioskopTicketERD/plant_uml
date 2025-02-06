@@ -1,0 +1,99 @@
+@startuml
+
+entity Tiket {
+    id_tiket : number <PK>
+    --
+    harga : number 
+    stok : number
+}
+
+entity Kursi{
+    id_kursi : number <PK>
+    --
+    no_kursi : number
+}
+
+entity Pemesan {
+    id_pemesan : number <PK>
+    --
+    email : text
+    alamat : number
+    no_hp : number
+    jenis_kelamin : text 
+}
+
+object Memesan {
+    id_pemesan : number <FK>
+    tanggal_pemesan : date <FK>
+    --
+    total_harga : number
+}
+
+entity Jadwal {
+    id_jadwal : number <PK>
+    --
+    tanggal : date
+    jam_mulai : time
+    jam_selesai : time
+    jam_berakhir : time
+}
+
+entity Kategori {
+    id_kategori : number <PK>
+    --
+    nama_kategori : text
+}
+
+entity Film {
+    id_film : number <PK>
+    --
+    judul : text
+}
+
+entity Studio {
+    id_studio : number <PK>
+    --
+    nama_studio : text
+}
+
+
+Tiket||--||Kursi
+note on link
+    Memiliki
+end note
+
+Tiket}|--Memesan
+note on link
+    Memesan
+end note
+
+Pemesan}|--Memesan
+note on link
+    Memesan
+end note
+
+Pemesan||--|{Jadwal
+note on link
+    Melihat
+end note
+
+Jadwal}|--|| Film
+note on link
+    Memiliki
+end note
+
+Film }|--||Kategori
+note on link
+    Memiliki
+end note
+
+Film||--|{Studio
+note on link
+    Studio
+end note
+
+Kursi}|--||Studio
+note on link
+    Memiliki
+end note
+@enduml
